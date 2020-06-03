@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: cf tutorial stack
+Parameters:
+  Prefix:
+    Type: Strign
+    Default: testing
+    Description: Prefix Name
+    
+  ServiceName:
+    Type: String
+    Default: cf-tutorial
+
+Resources:
+  EC2SecurityGroupApp:
+    Type
+Outputs:
