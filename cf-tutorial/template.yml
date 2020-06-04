@@ -12,5 +12,37 @@ Parameters:
 
 Resources:
   EC2SecurityGroupApp:
-    Type
+    Type: "AWS::EC2::SecurityGroup"
+    Properties:
+      GroupName: !Sub "${Prefix}_${ServiceName}_app"
+      GroupDescription: "Web server security group"
+      VpcId:
+        "{your VPCID}"
+      SecurityGroupIngress:
+        - IpProtocolL: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: "0.0.0.0/0"
+      Tags:
+        - Key: Name
+          Value: !Sub "${Prefix}_${ServiceName}_app"
+
+  Ec2InstanceServer:
+    Type: "AWS::EC2::Instance"
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      ImageId: "ami-"
+      InstanceType: "t2.micro"
+      KeyName: "keypair"
+      SecurytyGroupIds:
+        - !Ref Ec2SecurityGroupApp
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Eds:
+            VolumeSize: 8
+            VolumeTyoe: gp2
+      Tags:
+        - Key: Name
+          Value: !Sub "${Prefix}_${ServieName}_app"
+  
 Outputs:
