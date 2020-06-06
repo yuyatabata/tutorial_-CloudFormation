@@ -10,11 +10,12 @@ Parameters:
     Type: String
     Default: cf-tutorial
 
+# AWSで使うサービスを定義していく
 Resources:
   EC2SecurityGroupApp:
-    Type: "AWS::EC2::SecurityGroup"
-    Properties:
-      GroupName: !Sub "${Prefix}_${ServiceName}_app"
+    Type: "AWS::EC2::SecurityGroup" # 配置するリソース。
+    Properties: # 
+      GroupName: !Sub "${Prefix}_${ServiceName}_app" # Parametersから参照
       GroupDescription: "Web server security group"
       VpcId:
         "{your VPCID}"
@@ -31,7 +32,7 @@ Resources:
     Type: "AWS::EC2::Instance"
     Properties:
       AvailabilityZone: "ap-northeast-1c"
-      ImageId: "ami-"
+      ImageId: "ami-06cd52961ce9f0d85"
       InstanceType: "t2.micro"
       KeyName: "keypair"
       SecurytyGroupIds:
@@ -44,5 +45,4 @@ Resources:
       Tags:
         - Key: Name
           Value: !Sub "${Prefix}_${ServieName}_app"
-  
 Outputs:
