@@ -3,9 +3,14 @@ Resources:
   SampleLambda:
     Type: AWS::Lambda::Function
     Properties:
-      Code: src # lambdaのソースコードを保存しているローカルのディレクトリ
+      Code:
+        S3Bucket: tutorial-cloudformation
+        S3Key: lambda/ed7b25fa2509e2594a15c8ae5177a007
       Handler: main.lambda_handler
-      Role: !GetAtt SampleIAMRole.Arn
+      Role:
+        Fn::GetAtt:
+        - SampleIAMRole
+        - Arn
       Runtime: python3.7
   SampleIAMRole:
     Type: AWS::IAM::Role
